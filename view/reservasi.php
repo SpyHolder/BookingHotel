@@ -20,6 +20,18 @@ if (isset($_POST['submit'])) {
     reservasi($_POST);
 }
 
+// GAK JALAN
+// function hargaTotal()
+// {
+//     global $hargaPerMalam, $totalHarga;
+//     if (isset($_POST['checkin']) || isset($_POST['checkout'])) {
+//         $tanggal_1 = date_create($_POST['checkout']);
+//         $tanggal_2 = date_create($_POST['checkin']);
+//         $diff = date_diff($tanggal_1, $tanggal_2);
+//         $selisih = $diff->days;
+//         $totalHarga = $selisih * $hargaPerMalam;
+//     }
+// }
 
 ?>
 
@@ -34,7 +46,7 @@ if (isset($_POST['submit'])) {
 
 <body>
     <form method="post">
-        <input type="hidden" value="<?= $idRoom ?>">
+        <input type="hidden" value="<?= $idRoom ?>" name="idroom">
         <table>
             <tr>
                 <td>Foto Room</td>
@@ -46,25 +58,46 @@ if (isset($_POST['submit'])) {
             </tr>
             <tr>
                 <td>Harga Per Malam</td>
-                <td><input type="text" disabled value="<?= $hargaPerMalam ?>"></td>
+                <td><input type="text" disabled value="<?= $hargaPerMalam ?>" id="hargaPerMalam"></td>
             </tr>
             <tr>
                 <td>Tanggal Check In</td>
-                <td><input type="date" name="checkin"></td>
+                <td><input type="date" name="checkin" id="checkin"></td>
             </tr>
             <tr>
                 <td>Tanggal Check Out</td>
-                <td><input type="date" name="checkout"></td>
+                <td><input type="date" name="checkout" id="checkout"></td>
             </tr>
             <tr>
                 <td>Total Harga</td>
-                <td><input type="number" name="totalharga"></td>
+                <td><input type="number" name="totalharga" id="totalHarga" disabled></td>
             </tr>
             <tr>
                 <td colspan="2"><button type="submit" name="submit">Bayar</button></td>
             </tr>
         </table>
     </form>
+
+    <!-- GAK JALAN
+    <script>
+        function totalHarga() {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const hargaPerMalam = document.getElementById('hargaPerMalam').value;
+            if (checkin && checkout) {
+
+                const tanggalCheckin = new Date(checkin);
+                const tanggalCheckout = new Date(checkout);
+
+                const selisihWaktu = tanggalCheckout - tanggalCheckin;
+                const selisihHari = selisihWaktu / (1000 * 60 * 60 * 24);
+
+                const totalHarga = selisihHari * hargaPerMalam;
+                document.getElementById('totalHarga').value = totalHarga;
+            }
+        }
+    </script> -->
+
 </body>
 
 </html>

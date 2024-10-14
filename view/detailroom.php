@@ -7,7 +7,6 @@ if (!$conn) {
     echo "koneksi gagal";
 }
 
-
 $ID = $_GET['id'];
 $query = mysqli_query($conn, "select * from room where idroom = $ID");
 
