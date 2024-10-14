@@ -14,3 +14,12 @@ function masuk($id)
         header("Location: reservasi.php?kode=" . $id);
     }
 }
+
+function reservasi($data){
+
+    $checkin = $data['checkin'];
+    $checkout = $data['checkout'];
+    $totalharga = $data['totalharga'];
+    $IDroom = $data['idroom'];
+
+}
