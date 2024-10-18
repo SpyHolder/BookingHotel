@@ -20,7 +20,6 @@ if (isset($_POST['submit'])) {
     reservasi($_POST);
 }
 
-// GAK JALAN
 // function hargaTotal()
 // {
 //     global $hargaPerMalam, $totalHarga;
@@ -62,7 +61,7 @@ if (isset($_POST['submit'])) {
             </tr>
             <tr>
                 <td>Tanggal Check In</td>
-                <td><input type="date" name="checkin" id="checkin"></td>
+                <td><input type="date" name="checkin" id="checkin" ></td>
             </tr>
             <tr>
                 <td>Tanggal Check Out</td>
@@ -70,30 +69,33 @@ if (isset($_POST['submit'])) {
             </tr>
             <tr>
                 <td>Total Harga</td>
-                <td><input type="number" name="totalharga" id="totalHarga" disabled></td>
+                <td><input type="text" name="totalharga" id="totalHarga"></td>
             </tr>
             <tr>
                 <td colspan="2"><button type="submit" name="submit">Bayar</button></td>
             </tr>
         </table>
     </form>
-
-    <!-- GAK JALAN
-    <script>
+    <!-- <script>
         function totalHarga() {
             const checkin = document.getElementById('checkin').value;
-            const checkout = document.getElementById('checkout').value;
-            const hargaPerMalam = document.getElementById('hargaPerMalam').value;
-            if (checkin && checkout) {
+            const checkout = document.getElementById('checkOut').value;
+            const hargaPerMalam = parseFloat(document.getElementById('hargaPerMalam').value);
 
+            if (checkin && checkout) {
                 const tanggalCheckin = new Date(checkin);
                 const tanggalCheckout = new Date(checkout);
 
                 const selisihWaktu = tanggalCheckout - tanggalCheckin;
-                const selisihHari = selisihWaktu / (1000 * 60 * 60 * 24);
+                const selisihHari = selisihWaktu / (1000 * 60 * 60 * 24); // Konversi milidetik ke hari
 
-                const totalHarga = selisihHari * hargaPerMalam;
-                document.getElementById('totalHarga').value = totalHarga;
+                if (selisihHari > 0) {
+                    const totalHarga = selisihHari * hargaPerMalam;
+                    document.getElementById('totalHarga').value = totalHarga;
+                } else {
+                    alert("Tanggal check-out harus setelah tanggal check-in");
+                    document.getElementById('totalHarga').value = 0;
+                }
             }
         }
     </script> -->

@@ -25,11 +25,21 @@ function reservasi($data){
 
     $dataUser = $_SESSION['user']['iduser'];
 
-    $query = mysqli_query($conn,"insert into reservasi (iduser,idroom,tanggalcheckin,tanggalchekout,totalharga,status) values ($dataUser,$IDroom,'$checkin','$checkout','$totalharga','belum bayar')");
+    $date = date('m/j/Y H:i:s');
+
+    $query = mysqli_query($conn,"insert into reservasi (iduser,idroom,tanggalcheckin,tanggalchekout,totalharga,status,tanggalReservasi) values ($dataUser,$IDroom,'$checkin','$checkout','$totalharga','belum bayar','$date')");
     if (!$query) {
         echo "<script>alert('Gagal menambahkan data');</script>";
     } else {
-        header("Location: pembayaran.php");
+        $queryLagi = mysqli_query($conn,"select * from reservasi where tanggalReservasi = '$date' and idUser = $dataUser");
+        if (mysqli_num_rows($queryLagi) > 0) {
+            $row = $queryLagi->fetch_array();
+            $idReservasi = $row['idreservasi'];
+            header("Location: pembayaran.php?kode=$idReservasi");
+        }
     }
-
 }
+
+// function bayar($data){
+//     $idReservasi = 
+// }
